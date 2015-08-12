@@ -133,4 +133,7 @@
     </div>
 </nav>
 </body>
+<jq:jquery>
+  $('[data-toggle="popover"]').popover()
+</jq:jquery>
 </html>

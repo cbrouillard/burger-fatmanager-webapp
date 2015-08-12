@@ -99,6 +99,29 @@ class BackupFileController {
         redirect action: "index"
     }
 
+    @Transactional
+    def deleteTrack (){
+        def track = Track.findByIdAndOwner (params.id, springSecurityService.currentUser)
+        if (track){
+            track.delete(flush: true)
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'Track.label', default: 'Track'), track.id])
+        }
+
+        chain action: 'index'
+    }
+
+    def downloadTrack (){
+        def track = Track.findByIdAndOwner (params.id, springSecurityService.currentUser)
+        if (track){
+            response.setContentType("application/octet-stream")
+            response.setHeader("Content-disposition", "attachment;filename=\"FAT_${track.name.trim()}.raw.sng\"")
+            response.outputStream << track.data
+            return
+        }
+
+        redirect action: 'index'
+    }
+
     protected void notFound() {
         request.withFormat {
             form multipartForm {

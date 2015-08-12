@@ -1,3 +1,4 @@
+<%@ page import="java.nio.charset.StandardCharsets" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -92,12 +93,12 @@
                                         <div class="btn-group">
                                             <g:link controller="backupFile" class="btn btn-success"
                                                     action="downloadTrack"
-                                                    id="${file.id}" params="[trackId: track.id]">
+                                                    id="${track.id}">
                                                 <span class="glyphicon glyphicon-download"></span>
                                             </g:link>
                                             <g:link class="btn btn-danger" controller="backupFile"
                                                     action="deleteTrack"
-                                                    id="${file.id}" params="[trackId: track.id]">
+                                                    id="${track.id}" params="[file: file.id]">
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </g:link>
                                         </div>
