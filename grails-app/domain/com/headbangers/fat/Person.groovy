@@ -6,16 +6,21 @@ class Person {
 
 	String username
 	String password
+    String artistName
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
+
+    String token
 
 	static transients = ['springSecurityService']
 
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
+        artistName blank: false, unique:true
+        token blank: false
 	}
 
 	static mapping = {

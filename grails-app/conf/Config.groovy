@@ -121,6 +121,7 @@ log4j.main = {
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.headbangers.fat.Person'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.headbangers.fat.PersonRole'
 grails.plugin.springsecurity.authority.className = 'com.headbangers.fat.Role'
+grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/':                              ['permitAll'],
 	'/index':                         ['permitAll'],

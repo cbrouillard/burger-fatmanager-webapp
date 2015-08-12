@@ -9,10 +9,23 @@
 *
 *= require bootstrap
 *= require_self
+*= require fileinput
 */
 
 body {
     padding-bottom: 90px;
+}
+
+.fattop-nav{
+    margin-bottom: 0px !important;
+    border:none !important;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #EFEFEF;
+    background-color: #337ab7;
 }
 
 .header-content {
@@ -24,6 +37,25 @@ body {
     margin-bottom: 20px;
     text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
     color: #EFEFEF;
+}
+
+.page-title{
+    color: #337ab7;
+    font-weight: bold;
+    font-size: 20px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.little-title{
+    color: #337ab7;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.marginedtop{
+    margin-top: 20px;
 }
 
 .header-content .disclaimer {

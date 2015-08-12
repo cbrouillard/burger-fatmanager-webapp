@@ -7,6 +7,7 @@
 //
 //= require jquery
 //= require bootstrap
+//= require fileinput
 //= require_tree .
 //= require_self
 

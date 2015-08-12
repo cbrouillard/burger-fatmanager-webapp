@@ -20,6 +20,36 @@
 
 <body>
 
+<sec:ifLoggedIn>
+    <nav class="navbar navbar-default navbar-static-top fattop-nav" role="navigation">
+        <div class="container-fluid">
+            <div class="col-lg-8 col-lg-offset-2 col-xs-12">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#navbar-collapse-1">
+                        <span class="sr-only">Toggle</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-collapse-1">
+
+                    <ul class="nav navbar-nav">
+                        <li class="${controllerName == 'backupFile' ? "active" : ""}"><g:link controller="backupFile" action="index">Backup and tracks</g:link></li>
+                        <li class="${controllerName == 'kitFile' ? "active" : ""}"><a href="#">Kits and samples</a></li>
+                    </ul>
+
+                </div><!-- /.navbar-collapse -->
+            </div>
+        </div><!-- /.container-fluid -->
+
+    </nav>
+</sec:ifLoggedIn>
+
 <div class="header-content">
     <div class="container-fluid">
         <div class="col-lg-8 col-lg-offset-2 col-xs-12">
@@ -31,6 +61,38 @@
             <div class="disclaimer">
                 This free software allow you to make some music on your GameBoy Advance system.
             </div>
+
+            <div class="disclaimer">
+                <sec:ifNotLoggedIn>
+
+                    <form class="form-inline" autocomplete='off' action='${postUrl}' method='POST' id='loginForm'
+                          autocomplete='off' aria-autocomplete="off">
+                        <div class="form-group">
+                            <label class="sr-only" for="username">Username</label>
+                            <input type="text" class="form-control" id="username" name="j_username"
+                                   placeholder="Username">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="sr-only" for="password">Password</label>
+                            <input type="password" class="form-control" name="j_password" id="password"
+                                   placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-default">Sign in</button>
+                        <g:link controller="person" action="askregister" class="btn btn-warning">Register</g:link>
+                    </form>
+                    <g:if test='${flash.message}'>
+                        <div class='disclaimer alert-danger alert'>${flash.message}</div>
+                    </g:if>
+                </sec:ifNotLoggedIn>
+                <sec:ifLoggedIn>
+                    <span class="glyphicon glyphicon-heart"></span>
+                    <g:link controller="person" action="profile"
+                            class="btn btn-info">${sec.loggedInUserInfo(field: "username")}</g:link>
+                    <g:link controller="logout" class="btn btn-default">Logout</g:link>
+                </sec:ifLoggedIn>
+            </div>
+
         </div>
     </div>
 </div>
