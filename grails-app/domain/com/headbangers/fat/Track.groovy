@@ -1,13 +1,15 @@
 package com.headbangers.fat
 
-class Track {
+class Track implements Comparable<Track> {
 
     static belongsTo = [Person, BackupFile]
 
     String id
 
+    Integer index
     String name
     Long size
+    byte[] data
 
     Person owner
 
@@ -22,4 +24,9 @@ class Track {
 
     Date dateCreated
     Date lastUpdated
+
+    @Override
+    int compareTo(Track o) {
+        return this.index.compareTo(o.index)
+    }
 }

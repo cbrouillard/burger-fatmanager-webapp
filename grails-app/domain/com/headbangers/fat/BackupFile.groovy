@@ -10,6 +10,7 @@ class BackupFile {
     String name
 
     Person owner
+    SortedSet<Track> tracks
 
     static constraints = {
         name nullable: true, blank: false

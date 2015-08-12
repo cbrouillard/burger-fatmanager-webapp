@@ -28,6 +28,11 @@ body {
     background-color: #337ab7;
 }
 
+.message-normal{
+    font-size: 14px;
+    margin-top: 10px;
+}
+
 .header-content {
     padding-top: 60px;
     padding-bottom: 60px;
@@ -51,7 +56,6 @@ body {
     color: #337ab7;
     font-weight: bold;
     margin-bottom: 20px;
-    padding: 10px;
 }
 
 .marginedtop{

@@ -6,7 +6,7 @@
 
 <body>
 <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-    <div class="page-title">Your profile</div>
+    <div class="page-title">Register</div>
 </div>
 
 <div class="col-xs-12 col-lg-5 col-lg-offset-2">
@@ -28,19 +28,32 @@
 
     <div class="panel panel-primary">
         <div class="panel-body">
-            <g:form controller="person" action="saveprofile" method="post" data-toggle="validator">
+            <g:form controller="person" action="register" method="post"  data-toggle="validator">
                 <div class="form-group">
-                    <label for="artistName">Artist name</label>
-                    <input type="text" class="form-control" id="artistName" name="artistName" placeholder="Pseudonym / name" value="${user?.artistName}" required="">
+                    <label for="username">Email</label>
+                    <input type="email" class="form-control" id="username" name="username" placeholder="Your username. Will be used for validation."
+                           value="${user?.username}" required="">
                     <div class="help-block with-errors"></div>
                 </div>
+
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Minimum 6 characters">
+                    <label for="artistName">Artist name</label>
+                    <input type="text" class="form-control" id="artistName" name="artistName"
+                           placeholder="Pseudonym / name" value="${user?.artistName}" required="">
+                    <div class="help-block with-errors"></div>
                 </div>
+
+                <div class="form-group">
+                    <label for="passwordNew">Password</label>
+                    <input type="password" class="form-control" id="passwordNew" name="passwordNew" placeholder="Security" required="" data-minlength="6">
+                    <div class="help-block with-errors"></div>
+                </div>
+
                 <div class="form-group">
                     <label for="passwordCheck">Password check</label>
-                    <input type="password" class="form-control" id="passwordCheck" name="passwordCheck" placeholder="Retype your password">
+                    <input type="password" class="form-control" id="passwordCheck" name="passwordCheck"
+                           placeholder="Retype your password" required="" data-match-error="Pasword do not match" data-match="#passwordNew">
+                    <div class="help-block with-errors"></div>
                 </div>
                 <hr/>
                 <button type="submit" class="btn btn-default pull-right">Save</button>

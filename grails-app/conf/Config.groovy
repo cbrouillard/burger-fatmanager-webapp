@@ -11,6 +11,14 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
+def ENV_NAME = "FAT_CONF"
+def props = new Properties()
+if (System.getenv(ENV_NAME)) {
+    InputStream is = new BufferedInputStream(new FileInputStream(System.getenv(ENV_NAME)))
+    props.load(is)
+    is.close()
+}
+
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 
 // The ACCEPT header will not be used for content negotiation for user agents containing the following strings (defaults to the 4 major rendering engines)
@@ -122,6 +130,11 @@ grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.headbangers.f
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.headbangers.fat.PersonRole'
 grails.plugin.springsecurity.authority.className = 'com.headbangers.fat.Role'
 grails.plugin.springsecurity.logout.postOnly = false
+grails.plugin.springsecurity.rejectIfNoRule = false
+grails.plugin.springsecurity.fii.rejectPublicInvocations = false
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/'
+grails.plugin.springsecurity.successHandler.alwaysUseDefault = true
+grails.plugin.springsecurity.useSwitchUserFilter = true
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/':                              ['permitAll'],
 	'/index':                         ['permitAll'],
@@ -132,4 +145,15 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/images/**':                  ['permitAll'],
 	'/**/favicon.ico':                ['permitAll']
 ]
+
+grails.mail.host = props.get("mail.host")
+grails.mail.port = props.get("mail.port")
+grails.mail.username = props.get("mail.username")
+grails.mail.password = props.get("mail.password")
+grails.mail.default.from = props.get("mail.default.from")
+
+grails.mail.props = ["mail.smtp.auth"                  : "true",
+                     "mail.smtp.socketFactory.port"    : "465",
+                     "mail.smtp.socketFactory.class"   : "javax.net.ssl.SSLSocketFactory",
+                     "mail.smtp.socketFactory.fallback": "false"]
 

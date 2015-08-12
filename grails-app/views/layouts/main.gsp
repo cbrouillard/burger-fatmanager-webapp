@@ -39,8 +39,31 @@
                 <div class="collapse navbar-collapse" id="navbar-collapse-1">
 
                     <ul class="nav navbar-nav">
-                        <li class="${controllerName == 'backupFile' ? "active" : ""}"><g:link controller="backupFile" action="index">Backup and tracks</g:link></li>
+                        <li class="${controllerName == 'backupFile' ? "active" : ""}"><g:link controller="backupFile"
+                                                                                              action="index">Backup and tracks</g:link></li>
                         <li class="${controllerName == 'kitFile' ? "active" : ""}"><a href="#">Kits and samples</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="${controllerName == 'person' ? "active" : ""}">
+                            <g:link controller="person" action="profile"><span
+                                    class="glyphicon glyphicon-heart"></span> ${sec.loggedInUserInfo(field: "username")}</g:link>
+                        </li>
+
+                        <sec:ifAllGranted roles="ROLE_ADMIN">
+                            <li class="${controllerName == 'admin' ? "active" : ""}">
+                                <g:link controller="admin" action="console">Administration</g:link>
+                            </li>
+                        </sec:ifAllGranted>
+
+                        <sec:ifSwitched>
+                            <li>
+                                <a href='${request.contextPath}/j_spring_security_exit_user'>
+                                    <span class="label label-danger">QUIT ADMIN MODE</span>
+                                </a>
+                            </li>
+                        </sec:ifSwitched>
+
+                        <li><g:link controller="logout">Logout</g:link></li>
                     </ul>
 
                 </div><!-- /.navbar-collapse -->
@@ -64,8 +87,8 @@
 
             <div class="disclaimer">
                 <sec:ifNotLoggedIn>
-
-                    <form class="form-inline" autocomplete='off' action='${postUrl}' method='POST' id='loginForm'
+                    <form class="form-inline" autocomplete='off' action='${request.contextPath}/j_spring_security_check'
+                          method='POST' id='loginForm'
                           autocomplete='off' aria-autocomplete="off">
                         <div class="form-group">
                             <label class="sr-only" for="username">Username</label>
@@ -82,15 +105,9 @@
                         <g:link controller="person" action="askregister" class="btn btn-warning">Register</g:link>
                     </form>
                     <g:if test='${flash.message}'>
-                        <div class='disclaimer alert-danger alert'>${flash.message}</div>
+                        <div class='message-normal alert-info alert'>${flash.message}</div>
                     </g:if>
                 </sec:ifNotLoggedIn>
-                <sec:ifLoggedIn>
-                    <span class="glyphicon glyphicon-heart"></span>
-                    <g:link controller="person" action="profile"
-                            class="btn btn-info">${sec.loggedInUserInfo(field: "username")}</g:link>
-                    <g:link controller="logout" class="btn btn-default">Logout</g:link>
-                </sec:ifLoggedIn>
             </div>
 
         </div>
@@ -109,7 +126,7 @@
                     <span style="-webkit-transform: rotate(180deg); -moz-transform: rotate(180deg); -o-transform: rotate(180deg); -khtml-transform: rotate(180deg); -ms-transform: rotate(180deg); transform: rotate(180deg); display: inline-block;"
                           class="grand">&copy;</span>
                     BROUILLARD Cyril - [2011-2015] - <g:message
-                            code="app.name"/> - GBA Tracker</p>
+                            code="app.name"/> - a GBA Tracker with a cool fat cat !</p>
             </div>
 
         </div>
