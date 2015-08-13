@@ -14,7 +14,7 @@ class Track implements Comparable<Track> {
     Person owner
 
     static constraints = {
-        name nullable:false, blank: false
+        name nullable: false, blank: false
         size nullable: true
     }
 
@@ -22,7 +22,7 @@ class Track implements Comparable<Track> {
         id generator: 'uuid'
     }
 
-    def beforeDelete (){
+    def beforeDelete() {
         BackupFile.withNewSession {
             def files = BackupFile.createCriteria().list {
                 tracks {
@@ -41,6 +41,31 @@ class Track implements Comparable<Track> {
 
     @Override
     int compareTo(Track o) {
-        return this.index.compareTo(o.index)
+        def compare = this.index.compareTo(o.index)
+        if (!compare) {
+            compare = this.name.compareTo(o.name)
+        }
+        return compare
+    }
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (getClass() != o.class) return false
+
+        Track track = (Track) o
+
+        if (name != track.name) return false
+        if (owner != track.owner) return false
+        if (size != track.size) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (name != null ? name.hashCode() : 0)
+        result = 31 * result + (size != null ? size.hashCode() : 0)
+        result = 31 * result + (owner != null ? owner.hashCode() : 0)
+        return result
     }
 }

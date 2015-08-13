@@ -1,6 +1,7 @@
 package com.headbangers.fat
 
 import grails.plugin.springsecurity.annotation.Secured
+import org.springframework.transaction.annotation.Transactional
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -58,33 +59,6 @@ class BackupFileController {
         redirect action: 'index'
     }
 
-    /*def edit(BackupFile backupFileInstance) {
-        respond backupFileInstance
-    }
-
-    @Transactional
-    def update(BackupFile backupFileInstance) {
-        if (backupFileInstance == null) {
-            notFound()
-            return
-        }
-
-        if (backupFileInstance.hasErrors()) {
-            respond backupFileInstance.errors, view:'edit'
-            return
-        }
-
-        backupFileInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'BackupFile.label', default: 'BackupFile'), backupFileInstance.id])
-                redirect backupFileInstance
-            }
-            '*'{ respond backupFileInstance, [status: OK] }
-        }
-    }*/
-
     @Transactional
     def delete(BackupFile backupFileInstance) {
 
@@ -100,9 +74,9 @@ class BackupFileController {
     }
 
     @Transactional
-    def deleteTrack (){
-        def track = Track.findByIdAndOwner (params.id, springSecurityService.currentUser)
-        if (track){
+    def deleteTrack() {
+        def track = Track.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        if (track) {
             track.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'Track.label', default: 'Track'), track.id])
         }
@@ -110,21 +84,21 @@ class BackupFileController {
         chain action: 'index'
     }
 
-    def download (){
+    def download() {
         def backupFile = BackupFile.findByIdAndOwner(params.id, springSecurityService.currentUser)
-        if (backupFile){
+        if (backupFile) {
             response.setContentType("application/octet-stream")
-            response.setHeader("Content-disposition", "attachment;filename=\"FAT_${backupFile.name?:"backup_"+formatDate(date: backupFile.dateCreated)}.sav\"")
-            response.outputStream << savFileService.recreateSavFile (backupFile)
+            response.setHeader("Content-disposition", "attachment;filename=\"FAT_${backupFile.name ?: "backup_" + formatDate(date: backupFile.dateCreated)}.sav\"")
+            response.outputStream << savFileService.recreateSavFile(backupFile)
             return
         }
 
         redirect action: 'index'
     }
 
-    def downloadTrack (){
-        def track = Track.findByIdAndOwner (params.id, springSecurityService.currentUser)
-        if (track){
+    def downloadTrack() {
+        def track = Track.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        if (track) {
             response.setContentType("application/octet-stream")
             response.setHeader("Content-disposition", "attachment;filename=\"FAT_${track.name.trim()}.raw.sng\"")
             response.outputStream << track.data
@@ -132,6 +106,49 @@ class BackupFileController {
         }
 
         redirect action: 'index'
+    }
+
+    def selectTrack() {
+        def tracks = new TreeSet<Track>(Track.findAllByOwner(springSecurityService.currentUser, [sort: 'name', order: 'asc']))
+        def file = BackupFile.findByIdAndOwner(params.id, springSecurityService.currentUser)
+
+        if (!file) {
+            redirect(action: 'index')
+            return
+        }
+
+        render view: 'tracklist', model: [tracks: tracks, file: file]
+    }
+
+    @Transactional
+    def addTrack() {
+        def track = Track.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        def file = BackupFile.findByIdAndOwner(params.file, springSecurityService.currentUser)
+
+        if (!track || !file) {
+            return
+        }
+
+        file.addToTracks(track)
+        file.save(flush: true)
+
+        render template: 'tracklist', model: [file: file]
+    }
+
+    @Transactional
+    def unlinkTrack() {
+        def track = Track.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        def file = BackupFile.findByIdAndOwner(params.file, springSecurityService.currentUser)
+
+        if (!track || !file) {
+            redirect(action: 'index')
+            return
+        }
+
+        file.removeFromTracks(track)
+        file.save(flush: true)
+
+        render template: 'tracklist', model: [file: file]
     }
 
     protected void notFound() {

@@ -21,3 +21,7 @@ if (typeof jQuery !== 'undefined') {
 		});
 	})(jQuery);
 }
+
+var fadeOut = function (divId){
+    $('#'+divId).fadeOut();
+}

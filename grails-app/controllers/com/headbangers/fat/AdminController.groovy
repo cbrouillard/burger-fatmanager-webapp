@@ -16,7 +16,7 @@ class AdminController {
     }
 
     @Transactional
-    def toggle (){
+    def toggle() {
         Person person = Person.get(params.id)
         if (person) {
             person.properties[params.t] = !person.properties[params.t]
@@ -30,7 +30,7 @@ class AdminController {
     def delete(Person personInstance) {
 
         if (personInstance == null) {
-            notFound()
+            redirect(action: 'console')
             return
         }
 

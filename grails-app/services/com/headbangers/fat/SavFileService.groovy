@@ -2,8 +2,12 @@ package com.headbangers.fat
 
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.multipart.MultipartFile
+import sun.nio.fs.UnixPath
 
 import java.nio.charset.StandardCharsets
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
 
 class SavFileService {
 
@@ -11,6 +15,8 @@ class SavFileService {
 
     // nb max tracks in one save
     static int TABLE_SIZE = 16;
+    static short FIRST_OFFSET = 0x50;
+    static int ALLOCATION_SIZE = 20;
 
     @Transactional
     def treatSaveFile(MultipartFile fileFromUpload, BackupFile dbData) {
@@ -67,11 +73,38 @@ class SavFileService {
 
     byte[] recreateSavFile (BackupFile dbData){
 
-        // ecriture de la table
+        File storageDir = new File("${dbData.owner.id}")
+        if (!storageDir.exists()) {
+            storageDir.mkdirs();
+        }
 
-        // ecriture des tracks
+        RandomAccessFile writer = null;
+        try {
+            writer = new RandomAccessFile(new File(storageDir, "${dbData.id}_g.sav"), "rw");
 
-        // padding
+            // ecriture de la table
+            writeAllocationTable(writer, dbData)
+
+            // ecriture des tracks
+            writeTracks(writer, dbData)
+
+        } catch (FileNotFoundException ex) {
+            log.error(ex)
+        } catch (IOException ex) {
+            log.error(ex)
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException ex) {
+                    log.error(ex)
+                }
+            }
+        }
+
+        // return
+        File toReturn = new File(storageDir, "${dbData.id}_g.sav")
+        return Files.readAllBytes(toReturn.toPath())
     }
 
     ArrayList<SongEntry> readAllocationTable(RandomAccessFile file) {
@@ -88,6 +121,67 @@ class SavFileService {
         return songs
     }
 
+    void writeAllocationTable (RandomAccessFile file, BackupFile dbData){
+
+        int cpt = 0;
+        short offset = FIRST_OFFSET;
+        dbData.tracks.each {track ->
+
+            file.writeShort(offset);
+            file.writeShort((short)track.size)
+
+            offset += (track.data.length + 6) // L N K FF FF 5A
+            cpt++
+        }
+
+        offset = cpt * 4
+        while (cpt < TABLE_SIZE){
+            file.writeShort(offset)
+            file.writeShort(0)
+            offset += 4;
+            cpt++;
+        }
+
+        // firstFreeOffset will be writtent later.
+        file.writeShort(0xBABA)
+        cpt++;
+
+        while (cpt < ALLOCATION_SIZE){
+            file.writeShort(0xFFFF)
+            file.writeShort(0xFFFF)
+            cpt ++;
+        }
+
+    }
+
+    def writeTracks (RandomAccessFile file, BackupFile dbData){
+
+        int offset = FIRST_OFFSET
+        dbData.tracks.each {track ->
+            file.seek(offset)
+            file.write (track.data)
+            file.writeByte(0x4C)
+            file.writeByte(0x4E)
+            file.writeByte(0x4B)
+            file.writeShort(0xFFFF)
+            file.writeByte(0x5A)
+
+            offset += (track.data.length + 6)
+        }
+
+        //
+        short firstFreeOffset = offset
+
+        // padding
+        while (offset < 0xFFFF){
+            file.writeShort(0xFFFF)
+            offset += 2;
+        }
+
+        file.seek(TABLE_SIZE * 4)
+        file.writeShort(firstFreeOffset)
+    }
+
     def readDatas(RandomAccessFile file, ArrayList<SongEntry> songs) {
         char initOffset = 0;
 
@@ -97,7 +191,31 @@ class SavFileService {
                 byte[] data = new byte[entry.getSize()];
 
                 // todo lire avec les "FOL"
-                file.read(data);
+                int cpt = 0
+                while (cpt < entry.getSize()){
+
+                    byte oneByte = file.readByte()
+
+                    boolean hasJmp = false
+                    if (oneByte == 0x4C){
+                        // etrange.
+                        byte second = file.readByte()
+                        byte third = file.readByte()
+                        if (second == 0x4E && 0x4B){
+                            // c'est un lien
+                            short newOffset = file.readShort()
+                            file.seek(newOffset + 3) // + F O L
+                            hasJmp = true
+                        }
+                    }
+
+                    if (!hasJmp) {
+                        data[cpt] = oneByte
+                        cpt++
+                    }
+
+                }
+
                 entry.setData(data);
 
                 log.debug "SONG DATA -----------"

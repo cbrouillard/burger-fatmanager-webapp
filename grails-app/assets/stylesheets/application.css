@@ -61,6 +61,9 @@ body {
 .marginedtop{
     margin-top: 20px;
 }
+.marginedbottom{
+    margin-bottom: 20px;
+}
 
 .header-content .disclaimer {
     font-size: 18px;
