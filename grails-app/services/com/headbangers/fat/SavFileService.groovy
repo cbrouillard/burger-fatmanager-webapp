@@ -65,6 +65,15 @@ class SavFileService {
         }
     }
 
+    byte[] recreateSavFile (BackupFile dbData){
+
+        // ecriture de la table
+
+        // ecriture des tracks
+
+        // padding
+    }
+
     ArrayList<SongEntry> readAllocationTable(RandomAccessFile file) {
         ArrayList<SongEntry> songs = new ArrayList<>()
 

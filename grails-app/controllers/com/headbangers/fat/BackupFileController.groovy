@@ -110,6 +110,18 @@ class BackupFileController {
         chain action: 'index'
     }
 
+    def download (){
+        def backupFile = BackupFile.findByIdAndOwner(params.id, springSecurityService.currentUser)
+        if (backupFile){
+            response.setContentType("application/octet-stream")
+            response.setHeader("Content-disposition", "attachment;filename=\"FAT_${backupFile.name?:"backup_"+formatDate(date: backupFile.dateCreated)}.sav\"")
+            response.outputStream << savFileService.recreateSavFile (backupFile)
+            return
+        }
+
+        redirect action: 'index'
+    }
+
     def downloadTrack (){
         def track = Track.findByIdAndOwner (params.id, springSecurityService.currentUser)
         if (track){
