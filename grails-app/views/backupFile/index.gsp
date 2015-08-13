@@ -15,7 +15,7 @@
 
     <g:uploadForm action="save" class="form-inline">
         <div class="form-group">
-            <label class="sr-only" for="savfile">Password</label>
+            <label class="sr-only" for="savfile">.sav file</label>
             <input type="file" class="file" name="savfile" id="savfile"
                    placeholder="File (.sav)"
                    data-show-preview="false"
