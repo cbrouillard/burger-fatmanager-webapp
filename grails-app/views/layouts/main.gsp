@@ -41,7 +41,8 @@
                     <ul class="nav navbar-nav">
                         <li class="${controllerName == 'backupFile' ? "active" : ""}"><g:link controller="backupFile"
                                                                                               action="index">Backup and tracks</g:link></li>
-                        <li class="${controllerName == 'kitFile' ? "active" : ""}"><a href="#">Kits and samples</a></li>
+                        <li class="${controllerName == 'kitFile' ? "active" : ""}"><g:link controller="kitFile"
+                                                                                           action="index">Kits and samples</g:link></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="${controllerName == 'person' ? "active" : ""}">

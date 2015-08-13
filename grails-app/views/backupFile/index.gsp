@@ -43,7 +43,9 @@
 
     <g:if test="${backupFileInstanceList}">
         <g:each in="${backupFileInstanceList}" var="file" status="i">
-            <g:render template="onebackupfile" model="[file: file, i: i]"/>
+            <div id="${file.id}">
+                <g:render template="onebackupfile" model="[file: file]"/>
+            </div>
         </g:each>
     </g:if>
     <g:else>

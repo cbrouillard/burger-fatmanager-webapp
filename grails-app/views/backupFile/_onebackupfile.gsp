@@ -1,4 +1,4 @@
-<div class="panel panel-primary" id="${file.id}">
+<div class="panel panel-primary">
     <div class="panel-heading">
 
         <div class="pull-right">
@@ -23,9 +23,8 @@
             </div>
         </div>
 
-        <span class="label label-warning">#${i + 1}</span>
         <g:if test="${file.name}">
-            <span class="label label-success">${file.name}</span>
+            ${file.name}
         </g:if>
         <span class="label label-info"><g:formatDate date="${file.dateCreated}"/></span>
         <span class="label label-info">${file.tracks.size()} tracks</span>
@@ -33,7 +32,7 @@
         <div class="clearfix">&nbsp;</div>
     </div>
 
-    <div class="panel-body" id="tracks${file.id}">
+    <div class="panel-body">
         <g:if test="${file.tracks}">
             <g:render template="tracklist" model="[file: file]"/>
         </g:if>

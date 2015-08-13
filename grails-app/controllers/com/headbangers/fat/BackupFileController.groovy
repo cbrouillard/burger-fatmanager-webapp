@@ -132,7 +132,7 @@ class BackupFileController {
         file.addToTracks(track)
         file.save(flush: true)
 
-        render template: 'tracklist', model: [file: file]
+        render template: 'onebackupfile', model: [file: file, hideAddAction:true, hideDeleteAction:true]
     }
 
     @Transactional
@@ -148,7 +148,7 @@ class BackupFileController {
         file.removeFromTracks(track)
         file.save(flush: true)
 
-        render template: 'tracklist', model: [file: file]
+        render template: 'onebackupfile', model: [file: file, hideAddAction:true, hideDeleteAction:true]
     }
 
     protected void notFound() {

@@ -16,7 +16,9 @@
         <div class="alert alert-info" role="status">${flash.message}</div>
     </g:if>
 
-    <g:render template="onebackupfile" model="[file: file, i: 0, hideAddAction: true, hideDeleteAction: true]"/>
+    <div id="${file.id}">
+        <g:render template="onebackupfile" model="[file: file, hideAddAction: true, hideDeleteAction: true]"/>
+    </div>
 
     <div class="panel panel-primary">
         <div class="panel-heading">Available tracks</div>
@@ -40,14 +42,14 @@
                                 <g:remoteLink class="btn btn-default" controller="backupFile"
                                               action="unlinkTrack"
                                               id="${track.id}" params="[file: file.id]"
-                                              update="tracks${file.id}">Remove from file
+                                              update="${file.id}">Remove from file
                                 </g:remoteLink>
                             </g:if>
                             <g:else>
                                 <g:remoteLink controller="backupFile" action="addTrack" id="${track.id}"
                                               params="[file: file.id]"
                                               class="btn btn-default"
-                                              update="tracks${file.id}">Add in file</g:remoteLink>
+                                              update="${file.id}">Add in file</g:remoteLink>
                             </g:else>
                         </td>
                     </tr>
