@@ -2,7 +2,7 @@ package com.headbangers.fat
 
 class Track implements Comparable<Track> {
 
-    static belongsTo = [Person, BackupFile]
+    static belongsTo = [Person]
 
     String id
 

@@ -1,7 +1,6 @@
 package com.headbangers.fat
 
 import grails.plugin.springsecurity.annotation.Secured
-import org.springframework.transaction.annotation.Transactional
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -117,7 +116,7 @@ class BackupFileController {
             return
         }
 
-        render view: 'tracklist', model: [tracks: tracks, file: file]
+        render view: 'managetracks', model: [tracks: tracks, file: file]
     }
 
     @Transactional
