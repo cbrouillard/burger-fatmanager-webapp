@@ -22,7 +22,8 @@
                        data-show-preview="false"
                        data-show-upload="false"
                        data-show-remove="false"
-                       data-show-caption="true">
+                       data-show-caption="true"
+                       data-browse-class="btn btn-success">
             </div>
 
             <div class="form-group">

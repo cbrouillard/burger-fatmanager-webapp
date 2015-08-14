@@ -4,7 +4,7 @@
         <a href="http://brouillard.me/shared/FAT_v1.0.0.gba"
            class="btn btn-lg btn-success btn-block">Download ROM (.gba)</a>
         <a href="http://brouillard.me/shared/FAT_documentation_FR.pdf"
-           class="btn btn-lg btn-warning btn-block">Download Documentation (.pdf FR)</a>
+           class="btn btn-lg btn-success btn-block">Download Documentation (.pdf FR)</a>
         <a href="https://twitter.com/Spintr0nic"
            class="btn btn-lg btn-info btn-block">Follow news on Twitter</a>
 

@@ -11,6 +11,8 @@ import java.nio.file.Paths
 
 class SavFileService {
 
+    def grailsApplication
+
     static transactional = true
 
     // nb max tracks in one save
@@ -21,8 +23,10 @@ class SavFileService {
     @Transactional
     def treatSaveFile(MultipartFile fileFromUpload, BackupFile dbData) {
 
+        String root = grailsApplication.config.fat.root
+
         // transfer
-        File storageDir = new File("${dbData.owner.id}")
+        File storageDir = new File("${root}${dbData.owner.id}/backup/")
         if (!storageDir.exists()) {
             storageDir.mkdirs();
         }
@@ -73,7 +77,7 @@ class SavFileService {
 
     byte[] recreateSavFile (BackupFile dbData){
 
-        File storageDir = new File("${dbData.owner.id}")
+        File storageDir = new File("${dbData.owner.id}/backup/")
         if (!storageDir.exists()) {
             storageDir.mkdirs();
         }

@@ -9,10 +9,6 @@
             </g:if>
 
             <div class="btn-group">
-                <g:link controller="kitFile" class="btn btn-success" action="download"
-                        id="${file.id}">
-                    <span class="glyphicon glyphicon-download"></span>
-                </g:link>
                 <g:if test="${!hideDeleteAction}">
                     <g:remoteLink controller="kitFile" resource="${file}" class="btn btn-danger"
                                   action="delete"
@@ -27,14 +23,14 @@
             ${file.name}
         </g:if>
         <span class="label label-info"><g:formatDate date="${file.dateCreated}"/></span>
-        <span class="label label-info">${file.samples.size()} tracks</span>
+        <span class="label label-info">${file.samples.size()} samples</span>
 
         <div class="clearfix">&nbsp;</div>
     </div>
 
     <g:if test="${file.samples}">
         <div class="panel-body">
-
+            <g:render template="samplelist" model="[file: file]"/>
         </div>
     </g:if>
 </div>
