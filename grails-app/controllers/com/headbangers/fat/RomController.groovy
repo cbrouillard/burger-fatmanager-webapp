@@ -21,7 +21,16 @@ class RomController {
             chain(action: 'index')
         }
 
-        // ok we have one or more kit selected. let's go.
-        romBuilderService.build (springSecurityService.currentUser, params.kit)
+        def rom = romBuilderService.build (springSecurityService.currentUser, params.kit)
+
+        if (rom) {
+            response.setContentType("application/octet-stream")
+            response.setHeader("Content-disposition", "attachment;filename=\"FAT_${springSecurityService.currentUser.artistName.replaceAll(' ', '_')}.gba\"")
+            response.outputStream << rom
+            return
+        }
+
+        flash.message = "There was a problem during generation. Sorry about that :("
+        chain action: "index"
     }
 }

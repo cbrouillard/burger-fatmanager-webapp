@@ -157,6 +157,7 @@ grails.mail.props = ["mail.smtp.auth"                  : "true",
                      "mail.smtp.socketFactory.fallback": "false"]
 
 fat.root = "/home/cyril/fat/"
-fat.ffmpeg = "ffmpeg"
-fat.gbfs = "/home/cyril/fat/gbfs.exe"
-fat.defaultrom = "/home/cyril/fat/FAT_default.gba"
+fat.convertSample = "/home/cyril/fat/convertSample.sh"
+fat.createGBFS = "/home/cyril/fat/createGBFS.sh"
+fat.buildRom = "/home/cyril/fat/buildRom.sh"
+fat.cleanAfterBuild = "/home/cyril/fat/cleanAfterBuild.sh"

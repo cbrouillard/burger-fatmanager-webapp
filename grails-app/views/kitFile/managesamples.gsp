@@ -32,7 +32,8 @@
                                data-show-upload="false"
                                data-show-remove="false"
                                data-show-caption="true"
-                               data-browse-class="btn btn-success">
+                               data-browse-class="btn btn-success"
+                               data-browse-label="Browse for sound file">
                     </div>
 
                     <input type="hidden" name="kit" value="${file.id}"/>

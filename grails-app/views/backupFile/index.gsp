@@ -23,7 +23,8 @@
                        data-show-upload="false"
                        data-show-remove="false"
                        data-show-caption="true"
-                       data-browse-class="btn btn-success">
+                       data-browse-class="btn btn-success"
+                       data-browse-label="Browse for .sav file">
             </div>
 
             <div class="form-group">
