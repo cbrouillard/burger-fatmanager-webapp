@@ -1,9 +1,9 @@
 package com.headbangers.fat
 
 import grails.plugin.springsecurity.annotation.Secured
+import org.springframework.transaction.annotation.Transactional
 
 import static org.springframework.http.HttpStatus.*
-import grails.transaction.Transactional
 
 @Secured(['ROLE_USER', 'ROLE_ADMIN'])
 @Transactional(readOnly = true)

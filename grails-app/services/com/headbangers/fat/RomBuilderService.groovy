@@ -59,7 +59,7 @@ class RomBuilderService {
 
             log.debug "GBFS"
             log.debug "----------"
-            println params
+            log.debug params
             log.debug "----------"
 
             // execution gbfs
@@ -94,7 +94,7 @@ class RomBuilderService {
         // builder la ROM.
         log.debug "ROM"
         log.debug "----------"
-        println rombuildParams
+        log.debug rombuildParams
         log.debug "----------"
         Runtime runtime = Runtime.getRuntime()
         Process build = runtime.exec((String[]) (rombuildParams.toArray()));

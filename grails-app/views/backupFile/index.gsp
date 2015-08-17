@@ -9,12 +9,11 @@
 
 <div class="col-xs-12 col-lg-8 col-lg-offset-2">
     <div class="page-title">Backup and tracks management</div>
-</div>
-
-<div class="col-xs-12 col-lg-5 col-lg-offset-2">
 
     <div class="marginedbottom">
         <g:uploadForm action="save" class="form-inline">
+            <span class="badge">Upload or new sav</span>
+
             <div class="form-group">
                 <label class="sr-only" for="savfile">.sav file</label>
                 <input type="file" class="file" name="savfile" id="savfile"
@@ -38,6 +37,12 @@
 
         </g:uploadForm>
     </div>
+
+</div>
+
+<div class="col-xs-12 col-lg-5 col-lg-offset-2">
+
+
 
     <g:if test="${flash.message}">
         <div class="alert alert-info" role="status">${flash.message}</div>

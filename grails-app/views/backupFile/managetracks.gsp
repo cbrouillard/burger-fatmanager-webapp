@@ -38,19 +38,22 @@
                             ${track.size} bytes
                         </td>
                         <td class="text-right">
-                            <g:if test="${file.tracks.contains(track)}">
+                            <span id="unlink${track.id}" class="${file.tracks.contains(track) ? '' : 'hiddenBtn'}">
                                 <g:remoteLink class="btn btn-default" controller="backupFile"
                                               action="unlinkTrack"
                                               id="${track.id}" params="[file: file.id]"
-                                              update="${file.id}">Remove from file
+                                              update="${file.id}"
+                                              after="showAndHide('add${track.id}', 'unlink${track.id}')">Remove from file
                                 </g:remoteLink>
-                            </g:if>
-                            <g:else>
+                            </span>
+
+                            <span id="add${track.id}" class="${file.tracks.contains(track) ? 'hiddenBtn' : ''}">
                                 <g:remoteLink controller="backupFile" action="addTrack" id="${track.id}"
                                               params="[file: file.id]"
                                               class="btn btn-default"
-                                              update="${file.id}">Add in file</g:remoteLink>
-                            </g:else>
+                                              update="${file.id}"
+                                              after="showAndHide('unlink${track.id}', 'add${track.id}')">Add in file</g:remoteLink>
+                            </span>
                         </td>
                     </tr>
                 </g:each>

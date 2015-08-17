@@ -1,6 +1,6 @@
 <g:each in="${file.tracks}" var="track" status="j">
     <div class="col-lg-3 col-md-4 col-sm-4" id="${track.id}">
-        <div class="panel panel-success">
+        <div class="panel panel-warning">
             <div class="panel-heading">
                 <span class="badge">#${j + 1}</span>
 

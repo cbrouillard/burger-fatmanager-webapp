@@ -1,7 +1,7 @@
 package com.headbangers.fat
 
 import grails.plugin.springsecurity.annotation.Secured
-import grails.transaction.Transactional
+import org.springframework.transaction.annotation.Transactional
 
 import static org.springframework.http.HttpStatus.OK
 
@@ -47,7 +47,7 @@ class PersonController {
         return
     }
 
-// public
+    // public
     def askregister() {
         def user = new Person()
         render(view: 'askregister', model: [user: user])

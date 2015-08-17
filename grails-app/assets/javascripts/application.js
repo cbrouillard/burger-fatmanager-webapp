@@ -13,15 +13,24 @@
 //= require_self
 
 if (typeof jQuery !== 'undefined') {
-	(function($) {
-		$('#spinner').ajaxStart(function() {
-			$(this).fadeIn();
-		}).ajaxStop(function() {
-			$(this).fadeOut();
-		});
-	})(jQuery);
+    (function ($) {
+        $('#spinner').ajaxStart(function () {
+            $(this).fadeIn();
+        }).ajaxStop(function () {
+            $(this).fadeOut();
+        });
+    })(jQuery);
 }
 
-var fadeOut = function (divId){
-    $('#'+divId).fadeOut();
+var fadeOut = function (divId) {
+    $('#' + divId).fadeOut();
+}
+
+var showAndHide = function (toShow, toHide) {
+    $("#" + toShow).show();
+    $("#" + toHide).hide();
+}
+
+var selectAllCheckboxes = function () {
+    $('input:checkbox').not(this).prop('checked', 'true');
 }

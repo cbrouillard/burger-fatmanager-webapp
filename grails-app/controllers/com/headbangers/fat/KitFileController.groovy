@@ -2,10 +2,12 @@ package com.headbangers.fat
 
 import com.headbangers.technical.MyMultipartResolver
 import grails.plugin.springsecurity.annotation.Secured
+import org.apache.commons.fileupload.FileUploadBase.FileSizeLimitExceededException
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.multipart.MultipartFile
 
-import static org.springframework.http.HttpStatus.*
-import grails.transaction.Transactional
+import static org.springframework.http.HttpStatus.CREATED
+import static org.springframework.http.HttpStatus.NOT_FOUND
 
 @Secured(['ROLE_USER', 'ROLE_ADMIN'])
 @Transactional(readOnly = true)
@@ -80,7 +82,6 @@ class KitFileController {
 
     @Transactional
     def sendSample() {
-
         def kit = KitFile.findByIdAndOwner(params.kit, springSecurityService.currentUser)
         MultipartFile file = request.getFile("soundfile")
 
@@ -108,7 +109,6 @@ class KitFileController {
         }
 
         redirect action: "selectSamples", params: [id: kit.id]
-
     }
 
     def downloadSample() {
@@ -132,12 +132,7 @@ class KitFileController {
         def file = KitFile.findByIdAndOwner(params.file, springSecurityService.currentUser)
 
         if (!sample || !file) {
-            redirect(action:'index')
-            return
-        }
-
-        if (request.getAttribute(MyMultipartResolver.FILE_SIZE_EXCEEDED_ERROR)) {
-            render template: 'onekitfile', model: [file: file, hideAddAction: true, hideDeleteAction: true, message:"Your file is too large."]
+            redirect(action: 'index')
             return
         }
 
@@ -146,6 +141,7 @@ class KitFileController {
 
         render template: 'onekitfile', model: [file: file, hideAddAction: true, hideDeleteAction: true]
     }
+
 
     @Transactional
     def unlinkSample() {

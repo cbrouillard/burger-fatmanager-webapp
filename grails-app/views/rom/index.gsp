@@ -30,7 +30,7 @@
                             <th>&nbsp;</th>
                             <th>Kit name</th>
                             <th>#samples</th>
-                            <th class="text-right"><a href="#" class="btn btn-xs btn-default">Select all</a></th>
+                            <th class="text-right"><a href="javascript:selectAllCheckboxes();" class="btn btn-xs btn-default">Select all</a></th>
                         </tr>
                         </thead>
 

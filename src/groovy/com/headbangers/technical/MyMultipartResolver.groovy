@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.commons.CommonsMultipartResolver
 import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest
+import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest
 
 import javax.servlet.http.HttpServletRequest
 
@@ -25,7 +26,8 @@ class MyMultipartResolver extends CommonsMultipartResolver {
         }
         catch (MaxUploadSizeExceededException maxUploadSizeExceededException) {
             request.setAttribute(FILE_SIZE_EXCEEDED_ERROR, true)
-            return new DefaultMultipartHttpServletRequest(request, new LinkedMultiValueMap<String, MultipartFile>(), [:], [:])
+            return new StandardMultipartHttpServletRequest (request)
+            //return new DefaultMultipartHttpServletRequest(request, new LinkedMultiValueMap<String, MultipartFile>(), [:], [:])
         }
     }
 }

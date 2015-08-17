@@ -16,9 +16,9 @@ body {
     padding-bottom: 90px;
 }
 
-.fattop-nav{
+.fattop-nav {
     margin-bottom: 0px !important;
-    border:none !important;
+    border: none !important;
 }
 
 .navbar-default .navbar-nav > .active > a,
@@ -28,7 +28,7 @@ body {
     background-color: #337ab7;
 }
 
-.message-normal{
+.message-normal {
     font-size: 14px;
     margin-top: 10px;
 }
@@ -44,7 +44,7 @@ body {
     color: #EFEFEF;
 }
 
-.page-title{
+.page-title {
     color: #337ab7;
     font-weight: bold;
     font-size: 20px;
@@ -52,16 +52,17 @@ body {
     margin-bottom: 20px;
 }
 
-.little-title{
+.little-title {
     color: #337ab7;
     font-weight: bold;
     margin-bottom: 20px;
 }
 
-.marginedtop{
+.marginedtop {
     margin-top: 20px;
 }
-.marginedbottom{
+
+.marginedbottom {
     margin-bottom: 20px;
 }
 
@@ -99,7 +100,7 @@ body {
     left: auto;
 }
 
-.demofat{
+.demofat {
     border: 1px solid #337ab7 !important;
 }
 
@@ -143,4 +144,12 @@ body {
     .carousel-control {
         /*top: 20%;*/
     }
+}
+
+span.hiddenBtn {
+    display: none;
+}
+
+span.shownBtn {
+    display: inline-block;
 }

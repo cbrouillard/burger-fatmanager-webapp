@@ -8,9 +8,6 @@
 
 <div class="col-xs-12 col-lg-8 col-lg-offset-2">
     <div class="page-title">Kits and samples management</div>
-</div>
-
-<div class="col-xs-12 col-lg-5 col-lg-offset-2">
 
     <div class="marginedbottom">
 
@@ -26,6 +23,8 @@
         </g:hasErrors>
 
         <g:form action="save" class="form-inline" data-toggle="validator">
+            <span class="badge">Add a new kit</span>
+
             <div class="form-group">
                 <label class="sr-only" for="name">Kit name</label>
                 <input type="text" class="form-control" id="name" name="name"
@@ -37,6 +36,10 @@
         </g:form>
     </div>
 
+</div>
+
+<div class="col-xs-12 col-lg-5 col-lg-offset-2">
+
     <g:if test="${flash.message}">
         <div class="alert alert-info" role="status">${flash.message}</div>
     </g:if>
@@ -44,7 +47,7 @@
     <g:if test="${kitFileInstanceList}">
         <g:each in="${kitFileInstanceList}" var="file" status="i">
             <div id="${file.id}">
-                <g:render template="onekitfile" model="[file:file]"/>
+                <g:render template="onekitfile" model="[file: file]"/>
             </div>
         </g:each>
     </g:if>
