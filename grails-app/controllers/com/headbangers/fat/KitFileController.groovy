@@ -80,6 +80,8 @@ class KitFileController {
         render view: 'managesamples', model: [samples: samples, file: file]
     }
 
+    public static final okcontents = ['audio/mp3', 'audio/wav', 'audio/ogg']
+
     @Transactional
     def sendSample() {
         def kit = KitFile.findByIdAndOwner(params.kit, springSecurityService.currentUser)
@@ -90,7 +92,7 @@ class KitFileController {
             return
         }
 
-        if (!file.isEmpty()) {
+        if (!file.isEmpty() && okcontents.contains(file.contentType)) {
 
             Sample sample = new Sample()
             sample.name = file.originalFilename
@@ -106,9 +108,11 @@ class KitFileController {
             flash.message = message(code: 'default.created.message', args: [message(code: 'sample.label', default: 'Sample'), sample.id])
             chain(action: 'selectSamples', params: [id: kit.id])
             return
+        } else {
+            flash.message = "Bad or empty file."
         }
 
-        redirect action: "selectSamples", params: [id: kit.id]
+        chain action: "selectSamples", params: [id: kit.id]
     }
 
     def downloadSample() {
