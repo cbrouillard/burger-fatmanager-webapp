@@ -56,7 +56,7 @@
         </g:each>
     </g:if>
     <g:else>
-        <div class="alert alert-info marginedtop">You don't have any backup files here. You can send a new one with the form above : simply browse for a FAT's ".sav" file, name it if you wish and click send !</div>
+        <div class="alert alert-info">You don't have any backup files here. You can send a new one with the form above : simply browse for a FAT's ".sav" file, name it if you wish and click send !</div>
     </g:else>
 
 </div>

@@ -52,7 +52,7 @@
         </g:each>
     </g:if>
     <g:else>
-        <div class="alert alert-info marginedtop">You don't have any kit here. You can create a new one with the form above : provide your name and click "Create". That's it !</div>
+        <div class="alert alert-info">You don't have any kit here. You can create a new one with the form above : provide your name and click "Create". That's it !</div>
     </g:else>
 
 </div>
