@@ -80,7 +80,7 @@ class BackupFileController {
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'Track.label', default: 'Track'), track.id])
         }
 
-        chain action: 'index'
+        redirect action: 'index'
     }
 
     def download() {

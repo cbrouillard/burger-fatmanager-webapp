@@ -25,12 +25,23 @@
 
         <div class="panel-body table-responsive">
 
+            %{--  <div class="alert alert-danger">
+                  <span class="glyphicon glyphicon-trash"></span> Deletion (red "Delete" action) is irreversible. Track will be deleted from all sav files.
+              </div>
+  --}%
             <table class="table table-hover">
                 <thead><tr><th>&nbsp;</th><th>Track name</th><th>Size</th><th>&nbsp;</th></tr></thead>
                 <tbody>
                 <g:each in="${tracks}" var="track" status="j">
-                    <tr>
-                        <td><span class="badge">#${j + 1}</span></td>
+                    <tr id="tr${track.id}">
+                        <td>
+                            %{--<g:remoteLink controller="backupFile"
+                                          action="deleteTrack"
+                                          id="${track.id}"
+                                          class="btn btn-danger"
+                                          after="fadeOut('#tr${track.id}')"><span
+                                    class="glyphicon glyphicon-trash"></span> Delete</g:remoteLink>--}%
+                            <span class="badge">#${j + 1}</span></td>
                         <td>
                             ${track.name}
                         </td>

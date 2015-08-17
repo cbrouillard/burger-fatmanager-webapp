@@ -23,16 +23,14 @@ class Track implements Comparable<Track> {
     }
 
     def beforeDelete() {
-        BackupFile.withNewSession {
-            def files = BackupFile.createCriteria().list {
-                tracks {
-                    eq("id", this.id)
-                }
+        def files = BackupFile.createCriteria().list {
+            tracks {
+                eq("id", this.id)
             }
-            files.each { file ->
-                file.removeFromTracks(this)
-                file.save(flush: true)
-            }
+        }
+        files.each { file ->
+            file.removeFromTracks(this)
+            file.save(flush: true)
         }
     }
 
