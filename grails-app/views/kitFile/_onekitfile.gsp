@@ -1,3 +1,7 @@
+<g:if test="${message}">
+    <div class="alert alert-info">${message}</div>
+</g:if>
+
 <div class="panel panel-primary">
     <div class="panel-heading">
 

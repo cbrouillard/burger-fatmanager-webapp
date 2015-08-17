@@ -1,5 +1,6 @@
 package com.headbangers.fat
 
+import com.headbangers.technical.MyMultipartResolver
 import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.web.multipart.MultipartFile
 
@@ -131,6 +132,12 @@ class KitFileController {
         def file = KitFile.findByIdAndOwner(params.file, springSecurityService.currentUser)
 
         if (!sample || !file) {
+            redirect(action:'index')
+            return
+        }
+
+        if (request.getAttribute(MyMultipartResolver.FILE_SIZE_EXCEEDED_ERROR)) {
+            render template: 'onekitfile', model: [file: file, hideAddAction: true, hideDeleteAction: true, message:"Your file is too large."]
             return
         }
 
