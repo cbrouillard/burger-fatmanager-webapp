@@ -11,6 +11,10 @@
 
 <div class="col-xs-12 col-lg-8 col-lg-offset-2">
 
+    <g:if test="${flash.message}">
+        <div class="alert alert-info" role="status">${flash.message}</div>
+    </g:if>
+
     <div class="panel panel-primary">
 
         <div class="panel-body">
@@ -51,14 +55,16 @@
                                 </g:link>
                             </td>
                             <td>
-                                <g:link controller="admin" action="toggle" id="${person.id}" params="[t: 'accountExpired']"
+                                <g:link controller="admin" action="toggle" id="${person.id}"
+                                        params="[t: 'accountExpired']"
                                         class="btn  btn-${person.accountExpired ? 'danger' : 'success'}">
                                     <span class="glyphicon glyphicon-option-vertical"></span> <g:formatBoolean
                                         boolean="${person.accountExpired}"/>
                                 </g:link>
                             </td>
                             <td>
-                                <g:link controller="admin" action="toggle" id="${person.id}" params="[t: 'accountLocked']"
+                                <g:link controller="admin" action="toggle" id="${person.id}"
+                                        params="[t: 'accountLocked']"
                                         class="btn  btn-${person.accountLocked ? 'danger' : 'success'}">
                                     <span class="glyphicon glyphicon-option-vertical"></span> <g:formatBoolean
                                         boolean="${person.accountLocked}"/>
@@ -77,7 +83,7 @@
                                 <g:if test="${sec.loggedInUserInfo(field: "username") != person.username}">
                                     <sec:ifAllGranted roles='ROLE_ADMIN'>
                                         <div class="btn-group">
-                                            <g:form url="[id:person.id, action: 'delete']" method="DELETE"
+                                            <g:form url="[id: person.id, action: 'delete']" method="DELETE"
                                                     class="form-inline pull-right">&nbsp;
                                                 <button type="submit" class="btn btn-danger "
                                                         onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
@@ -96,6 +102,10 @@
                                         </div>
 
                                     </sec:ifAllGranted>
+                                </g:if>
+
+                                <g:if test="${!person.enabled}">
+                                    <g:link controller="admin" action="resendMailRegistration" id="${person.id}" class="btn btn-default">Resend reg mail</g:link>
                                 </g:if>
                             </td>
                         </tr>

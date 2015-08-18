@@ -45,4 +45,19 @@ class AdminController {
             '*' { render status: NO_CONTENT }
         }
     }
+
+    def resendMailRegistration() {
+        def person = Person.get(params.id)
+        if (person) {
+            sendMail {
+                async true
+                to person.username
+                subject '[FAT] Welcome onboard !'
+                html g.render(template: "/mail/registration", model: [user: person])
+            }
+
+            flash.message = "Message sent"
+        }
+        chain(action: 'console')
+    }
 }
