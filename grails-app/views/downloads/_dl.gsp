@@ -2,9 +2,13 @@
 
     <div class="panel-body">
         <a href="http://brouillard.me/shared/FAT_v1.0.0.gba"
-           class="btn btn-lg btn-success btn-block">Download ROM (.gba)</a>
+           class="btn btn-lg btn-success btn-block">Download "classic" ROM (with kits)</a>
+        <a href="http://brouillard.me/shared/FAT_default.gba"
+           class="btn btn-lg btn-success btn-block">Download "empty" ROM (without kits)</a>
         <a href="http://brouillard.me/shared/FAT_documentation_FR.pdf"
-           class="btn btn-lg btn-success btn-block">Download Documentation (.pdf FR)</a>
+           class="btn btn-lg btn-success btn-block">Download Documentation (FR)</a>
+
+        <hr/>
         <a href="https://twitter.com/Spintr0nic"
            class="btn btn-lg btn-info btn-block">Follow news on Twitter</a>
 
