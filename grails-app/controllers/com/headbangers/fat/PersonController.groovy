@@ -81,6 +81,7 @@ class PersonController {
         sendMail {
             async true
             to personInstance.username
+            from "noreply@furiousadvancetracker.com"
             subject '[FAT] Welcome onboard !'
             html g.render(template: "/mail/registration", model: [user: personInstance])
         }

@@ -52,6 +52,7 @@ class AdminController {
             sendMail {
                 async true
                 to person.username
+                from "noreply@furiousadvancetracker.com"
                 subject '[FAT] Welcome onboard !'
                 html g.render(template: "/mail/registration", model: [user: person])
             }

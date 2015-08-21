@@ -31,18 +31,13 @@ class BackupFileController {
             return
         }
 
-        def user = springSecurityService.currentUser
+        // checking file
+        def file = request.getFile("savfile")
 
-        def file
-        if (params.btnsubmit?.equals("send")) {
-            // checking file
-            file = request.getFile("savfile")
-
-            if (file.isEmpty() || !file.getContentType().equals("application/x-spss-sav")) {
-                flash.message = "No .sav file uploaded"
-                chain action: 'index'
-                return
-            }
+        if (!file.isEmpty() && !file.getContentType().equals("application/x-spss-sav")) {
+            flash.message = "Uploaded file is not a .sav one"
+            chain action: 'index'
+            return
         }
 
         backupFileInstance.owner = springSecurityService.currentUser
@@ -50,7 +45,7 @@ class BackupFileController {
         backupFileInstance.save flush: true
 
         // treating file
-        if (params.btnsubmit?.equals("send")) {
+        if (!file.isEmpty()) {
             savFileService.treatSaveFile(file, backupFileInstance)
         }
 
@@ -131,7 +126,7 @@ class BackupFileController {
         file.addToTracks(track)
         file.save(flush: true)
 
-        render template: 'onebackupfile', model: [file: file, hideAddAction:true, hideDeleteAction:true]
+        render template: 'onebackupfile', model: [file: file, hideAddAction: true, hideDeleteAction: true]
     }
 
     @Transactional
@@ -147,7 +142,7 @@ class BackupFileController {
         file.removeFromTracks(track)
         file.save(flush: true)
 
-        render template: 'onebackupfile', model: [file: file, hideAddAction:true, hideDeleteAction:true]
+        render template: 'onebackupfile', model: [file: file, hideAddAction: true, hideDeleteAction: true]
     }
 
     protected void notFound() {

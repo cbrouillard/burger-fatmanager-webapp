@@ -12,7 +12,7 @@
 
     <div class="marginedbottom">
         <g:uploadForm action="save" class="form-inline">
-            <span class="badge">Upload or new sav</span>
+            <span class="badge">Create backup</span>
 
             <div class="form-group">
                 <label class="sr-only" for="savfile">.sav file</label>
@@ -32,8 +32,7 @@
                        placeholder="Backup name">
             </div>
 
-            <button type="submit" class="btn btn-default" name="btnsubmit" value="send">Send .sav file</button>
-            <button type="submit" class="btn btn-default" name="btnsubmit" value="create">Create empty one</button>
+            <button type="submit" class="btn btn-default" name="btnsubmit" value="create">Create</button>
 
         </g:uploadForm>
     </div>

@@ -25,6 +25,9 @@
                         <g:sortableColumn property="username"
                                           title="Username"/>
 
+                        <g:sortableColumn property="artistName"
+                                          title="Artist name"/>
+
                         <g:sortableColumn property="enabled"
                                           title="Enabled"/>
 
@@ -47,6 +50,7 @@
                     <g:each in="${users}" var="person">
                         <tr>
                             <td>${person.username}</td>
+                            <td>${person.artistName}</td>
                             <td>
                                 <g:link controller="admin" action="toggle" id="${person.id}" params="[t: 'enabled']"
                                         class="btn  btn-${person.enabled ? 'success' : 'danger'}">

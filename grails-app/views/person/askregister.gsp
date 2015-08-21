@@ -31,7 +31,7 @@
             <g:form controller="person" action="register" method="post"  data-toggle="validator">
                 <div class="form-group">
                     <label for="username">Email</label>
-                    <input type="email" class="form-control" id="username" name="username" placeholder="Your username. Will be used for validation."
+                    <input type="email" class="form-control" id="username" name="username" placeholder="Your email. Will be used for validation. Will be your username."
                            value="${user?.username}" required="">
                     <div class="help-block with-errors"></div>
                 </div>
@@ -39,13 +39,13 @@
                 <div class="form-group">
                     <label for="artistName">Artist name</label>
                     <input type="text" class="form-control" id="artistName" name="artistName"
-                           placeholder="Pseudonym / name" value="${user?.artistName}" required="">
+                           placeholder="Pseudonym / name. This is NOT your username." value="${user?.artistName}" required="">
                     <div class="help-block with-errors"></div>
                 </div>
 
                 <div class="form-group">
                     <label for="passwordNew">Password</label>
-                    <input type="password" class="form-control" id="passwordNew" name="passwordNew" placeholder="Security" required="" data-minlength="6">
+                    <input type="password" class="form-control" id="passwordNew" name="passwordNew" placeholder="Security is important : 6 characters minimum." required="" data-minlength="6">
                     <div class="help-block with-errors"></div>
                 </div>
 

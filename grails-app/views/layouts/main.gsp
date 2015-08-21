@@ -84,7 +84,7 @@
             </div>
 
             <div class="disclaimer">
-                This free software allow you to make some music on your GameBoy Advance system.
+                This free software allows you to make some music on your GameBoy Advance system.
             </div>
 
             <div class="disclaimer">
