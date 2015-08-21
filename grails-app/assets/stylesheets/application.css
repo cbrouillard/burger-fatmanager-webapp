@@ -153,3 +153,9 @@ span.hiddenBtn {
 span.shownBtn {
     display: inline-block;
 }
+
+.panel-in-tab{
+    border-top:none;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}

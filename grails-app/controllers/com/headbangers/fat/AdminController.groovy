@@ -12,7 +12,19 @@ class AdminController {
         params.max = Math.min(max ?: 50, 100)
         def users = Person.list(params)
 
-        render(view: 'console', model: [users: users])
+        def lastRelease = Release.list([order: 'desc', sort: 'dateCreated', max: 1])
+
+        render(view: 'console', model: [users: users, release: (lastRelease ? lastRelease.get(0) : null)])
+    }
+
+    @Transactional
+    def release() {
+
+        Release release = new Release(params)
+        release.validate()
+        release.save(flush: true)
+        redirect(action: 'console')
+
     }
 
     @Transactional

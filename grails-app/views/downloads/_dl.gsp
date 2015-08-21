@@ -1,14 +1,31 @@
+<%@ page import="com.headbangers.fat.Release" %>
+
 <div class="panel panel-primary">
 
-    <div class="panel-body">
-        <a href="http://brouillard.me/shared/FAT_v1.0.0.gba"
-           class="btn btn-lg btn-success btn-block">Download "classic" ROM (with kits)</a>
-        <a href="http://brouillard.me/shared/FAT_default.gba"
-           class="btn btn-lg btn-success btn-block">Download "empty" ROM (without kits)</a>
-        <a href="http://brouillard.me/shared/FAT_documentation_FR.pdf"
-           class="btn btn-lg btn-success btn-block">Download Documentation (FR)</a>
+    <g:set var="release" value="${Release.list([order: 'desc', sort: 'dateCreated', max: 1])[0]}"/>
 
-        <hr/>
+    <div class="panel-body">
+        <g:if test="${release}">
+
+            <a href="${release.classicRomUrl}"
+               class="btn btn-lg btn-success btn-block">Download "classic" ROM (with kits)</a>
+
+            <a href="${release.emptyRomUrl}"
+               class="btn btn-lg btn-success btn-block">Download "empty" ROM (without kits)</a>
+
+            <g:if test="${release.docFrUrl}">
+                <a href="${release.docFrUrl}"
+                   class="btn btn-lg btn-success btn-block">Download Documentation (FR)</a>
+            </g:if>
+
+            <g:if test="${release.docEnUrl}">
+                <a href="${release.docEnUrl}"
+                   class="btn btn-lg btn-success btn-block">Download Documentation (EN)</a>
+            </g:if>
+
+            <hr/>
+        </g:if>
+
         <a href="https://twitter.com/Spintr0nic"
            class="btn btn-lg btn-info btn-block">Follow news on Twitter</a>
 
@@ -22,7 +39,7 @@
         <hr/>
 
         <div class="text-right">
-            <small>Current version : 1.0.0 pre-release</small>
+            <small>Current version : ${release? release.fatVersion : 'n/a'}</small>
         </div>
 
     </div>
