@@ -1,3 +1,27 @@
+
+def ENV_NAME = "FAT_CONF"
+def props = new Properties()
+String home = System.getProperty("user.home");
+String confFilePath = home+ "/.fat.properties"
+if(System.getenv(ENV_NAME)) {
+    confFilePath = System.getenv(ENV_NAME);
+}
+
+try {
+    InputStream is
+    File confFile = new File (confFilePath)
+    if (!confFile.exists()){
+        is = getClass().getClassLoader().getResourceAsStream("classpath:fat.properties")
+    } else{
+        is = new FileInputStream(confFilePath)
+    }
+
+    props.load(new BufferedInputStream(is))
+    is.close()
+} catch (Exception e){
+    println "FATAL ERROR : fat.properties does not exist or FAT_CONF env has not been defined."
+}
+
 dataSource {
     pooled = true
     jmxExport = true
@@ -18,11 +42,12 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            driverClassName = "org.postgresql.Driver"
-            username = "cyrils"
-            password = "lesbogossesdu75"
-            url = "jdbc:postgresql://127.0.0.1:5432/fat"
+            driverClassName = props.get("datasource.driverClassName")
+            username = props.get("datasource.username")
+            password = props.get("datasource.password")
+            dbCreate = props.get("datasource.dbCreate")
+            url = props.get("datasource.url")
+
         }
     }
     test {
@@ -33,11 +58,11 @@ environments {
     }
     production {
         dataSource {
-            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            driverClassName = "org.postgresql.Driver"
-            username = "cyrils"
-            password = "lesbogossesdu75"
-            url = "jdbc:postgresql://127.0.0.1:5432/fat"
+            driverClassName = props.get("datasource.driverClassName")
+            username = props.get("datasource.username")
+            password = props.get("datasource.password")
+            dbCreate = props.get("datasource.dbCreate")
+            url = props.get("datasource.url")
 
         }
     }

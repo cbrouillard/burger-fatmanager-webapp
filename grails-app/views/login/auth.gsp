@@ -28,6 +28,9 @@
                 <li data-target="#carousel-fat" data-slide-to="1"></li>
                 <li data-target="#carousel-fat" data-slide-to="2"></li>
                 <li data-target="#carousel-fat" data-slide-to="3"></li>
+                <li data-target="#carousel-fat" data-slide-to="4"></li>
+                <li data-target="#carousel-fat" data-slide-to="5"></li>
+                <li data-target="#carousel-fat" data-slide-to="6"></li>
             </ol>
 
             <!-- Wrapper for slides -->
@@ -40,11 +43,27 @@
                     </div>
                 </div>
 
+		<div class="item center">
+                    <img src="${resource(dir: 'images', file: 'screen_project.png')}">
+
+                    <div class="carousel-caption">
+                        The project management screen
+                    </div>
+                </div>
+
                 <div class="item center">
                     <img src="${resource(dir: 'images', file: 'screen_song.png')}">
 
                     <div class="carousel-caption">
                         Song screen, the sequencer
+                    </div>
+                </div>
+
+		<div class="item center">
+                    <img src="${resource(dir: 'images', file: 'screen_popup.png')}">
+
+                    <div class="carousel-caption">
+			Switch between features with the FAT popup
                     </div>
                 </div>
 
@@ -61,6 +80,14 @@
 
                     <div class="carousel-caption">
                         Save tracks on your GBA.
+                    </div>
+                </div>
+
+		<div class="item center">
+                    <img src="${resource(dir: 'images', file: 'smartphone.png')}">
+
+                    <div class="carousel-caption">
+                        Smartphone compatible ! (with emulator)
                     </div>
                 </div>
             </div>

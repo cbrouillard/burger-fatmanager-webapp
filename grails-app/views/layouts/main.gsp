@@ -127,8 +127,8 @@
                 <p class="navbar-text pull-left">
                     <span style="-webkit-transform: rotate(180deg); -moz-transform: rotate(180deg); -o-transform: rotate(180deg); -khtml-transform: rotate(180deg); -ms-transform: rotate(180deg); transform: rotate(180deg); display: inline-block;"
                           class="grand">&copy;</span>
-                    BROUILLARD Cyril - [2011-2015] - <g:message
-                            code="app.name"/> - a GBA Tracker with a cool fat cat !</p>
+                    BROUILLARD Cyril - [2011-2017] - <g:message
+                            code="app.name"/> - a GBA Tracker with my cool fat cat - name is Mailis !</p>
             </div>
 
         </div>
