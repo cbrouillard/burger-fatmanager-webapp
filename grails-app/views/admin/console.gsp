@@ -125,8 +125,13 @@
                                     </td>
                                 </tr>
                             </g:each>
-
+            
                         </table>
+
+                        <div class="pagination pull-right">
+                        <g:paginate total="${usersTotal}"/>
+                        </div>
+
                     </div>
 
                 </div>

@@ -14,7 +14,7 @@ class AdminController {
 
         def lastRelease = Release.list([order: 'desc', sort: 'dateCreated', max: 1])
 
-        render(view: 'console', model: [users: users, release: (lastRelease ? lastRelease.get(0) : null)])
+        render(view: 'console', model: [users: users, usersTotal: users.totalCount,release: (lastRelease ? lastRelease.get(0) : null)])
     }
 
     @Transactional

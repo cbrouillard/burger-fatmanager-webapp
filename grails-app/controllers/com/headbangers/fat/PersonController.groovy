@@ -3,12 +3,16 @@ package com.headbangers.fat
 import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.transaction.annotation.Transactional
 
+import com.megatome.grails.RecaptchaService
+
 import static org.springframework.http.HttpStatus.OK
 
 
 class PersonController {
 
     def springSecurityService
+
+    RecaptchaService recaptchaService
 
     @Secured(['ROLE_USER', 'ROLE_ADMIN'])
     def profile() {
@@ -66,8 +70,13 @@ class PersonController {
         }
         personInstance.token = UUID.randomUUID().toString();
 
+        def recaptchaOK = false
+        if (recaptchaService.verifyAnswer(session, request.getRemoteAddr(), params)) {
+          recaptchaOK = true
+        }
+
         personInstance.validate()
-        if (personInstance.hasErrors()) {
+        if (personInstance.hasErrors() || !recaptchaOK) {
             render view: 'askregister', model: [user: personInstance]
             return
         }

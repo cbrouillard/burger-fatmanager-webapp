@@ -56,6 +56,8 @@
                     <div class="help-block with-errors"></div>
                 </div>
                 <hr/>
+                <recaptcha:recaptcha />
+
                 <button type="submit" class="btn btn-default pull-right">Save</button>
             </g:form>
         </div>
