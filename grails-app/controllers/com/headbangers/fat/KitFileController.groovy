@@ -80,7 +80,7 @@ class KitFileController {
         render view: 'managesamples', model: [samples: samples, file: file]
     }
 
-    public static final okcontents = ['audio/mp3', 'audio/wav', 'audio/ogg']
+    public static final okcontents = ['audio/mp3', 'audio/wav', 'audio/ogg', 'audio/mpeg']
 
     @Transactional
     def sendSample() {
@@ -109,7 +109,7 @@ class KitFileController {
             chain(action: 'selectSamples', params: [id: kit.id])
             return
         } else {
-            flash.message = "Bad or empty file."
+            flash.message = "Bad/empty file or filtered file (${file?.contentType?:null})."
         }
 
         chain action: "selectSamples", params: [id: kit.id]
