@@ -13,6 +13,9 @@
             <a href="${release.emptyRomUrl}"
                class="btn btn-lg btn-success btn-block">Download "empty" ROM (without kits)</a>
 
+            <a href="http://brouillard.me/shared/FAT_v1.3.0-RC1_buildable.gba"
+               class="btn btn-lg btn-success btn-block">Download "build" ROM (u can add kits)</a>
+
             <g:if test="${release.docFrUrl}">
                 <a href="${release.docFrUrl}"
                    class="btn btn-lg btn-success btn-block">Download Documentation (FR)</a>

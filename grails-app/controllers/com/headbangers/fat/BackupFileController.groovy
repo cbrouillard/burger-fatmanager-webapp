@@ -14,6 +14,8 @@ class BackupFileController {
     def springSecurityService
     def savFileService
 
+    public static final okcontents = ['application/x-spss-sav', 'application/octet-stream']
+
     def index(Integer max) {
         def user = springSecurityService.currentUser
 
@@ -34,7 +36,7 @@ class BackupFileController {
         // checking file
         def file = request.getFile("savfile")
 
-        if (!file.isEmpty() && !file.getContentType().equals("application/x-spss-sav")) {
+        if (!file.isEmpty() && !okcontents.contains (file.getContentType())) {
             flash.message = "Uploaded file is not a .sav one"
             chain action: 'index'
             return
